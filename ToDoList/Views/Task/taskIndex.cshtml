@@ -1,0 +1,129 @@
+﻿@model ToDoList.ViewModel.PersonMissionVM
+
+<div class="container mt-5 px-4" style="background-color: #fcfcfc; min-height: 100vh;">
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4 p-4 bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="fw-bold mb-1" style="color: #2d3436;">
+                    Welcome, <span class="text-primary">@Model.Person?.Name</span> 👋
+                </h2>
+                <p class="text-muted mb-0">You have @(Model.missions?.Count ?? 0) missions assigned.</p>
+            </div>
+            <a asp-action="Create"
+               asp-controller="Task"
+               asp-route-personId="@Model.Person?.Id"
+               class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm">
+                <i class="bi bi-plus-lg me-1"></i> Create New Mission
+            </a>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-center">
+                <thead class="bg-white border-bottom">
+                    <tr class="text-secondary fw-bold" style="font-size: 0.9rem;">
+                        <th class="py-3">#</th>
+                        <th class="py-3 text-start">Mission Details</th>
+                        <th class="py-3">Status</th>
+                        <th class="py-3">Deadline</th>
+                        <th class="py-3">Time Left</th>
+                        <th class="py-3">File</th>
+                        <th class="py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var mission in Model.missions ?? new List<Mission>())
+                    {
+                        var now = DateTime.Now;
+                        var timeLeft = mission.Deadline - now;
+
+                        <tr>
+                            <td class="text-muted fw-bold">@i</td>
+                            <td class="text-start">
+                                <div class="fw-bold text-dark mb-0" style="font-size: 1rem;">@mission.TaskTitle</div>
+                                <div class="text-muted small text-truncate" style="max-width: 250px;" title="@mission.Description">
+                                    @(mission.Description ?? "No additional description.")
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge rounded-pill px-3 py-2 fw-bold"
+                                      style="background-color: #00d2d3; color: #fff; font-size: 0.75rem;">
+                                    @mission.Status
+                                </span>
+                            </td>
+                            <td class="text-muted small">
+                                @mission.Deadline.ToString("MMM dd, hh:mm tt")
+                            </td>
+                            <td>
+                                <span class="px-2 py-1 rounded-3 bg-light border text-muted small shadow-xs fw-semibold">
+                                    @if (timeLeft.TotalSeconds > 0)
+                                    {
+                                        @($"{(int)timeLeft.TotalHours}h {timeLeft.Minutes}m")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Expired</span>
+                                    }
+                                </span>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(mission.FilePath))
+                                {
+                                    <a href="@mission.FilePath" class="text-primary" download>
+                                        <i class="bi bi-file-earmark-arrow-down fs-5"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a asp-action="Edit" asp-route-id="@mission.Id" class="btn btn-sm btn-outline-warning border-0 p-1 rounded-2">
+                                        <i class="bi bi-pencil-square fs-5"></i>
+                                    </a>
+                                    <form asp-action="DeleteConfirmed" asp-route-id="@mission.Id" method="post" class="delete-form d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-1 rounded-2">
+                                            <i class="bi bi-trash3 fs-5"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: "Delete Mission?",
+                    text: "Are you sure you want to remove this mission?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#ff7675",
+                    cancelButtonColor: "#636e72",
+                    confirmButtonText: "Yes, delete it"
+                }).then((result) => {
+                    if (result.isConfirmed) form.submit();
+                });
+            });
+        });
+    </script>
+}

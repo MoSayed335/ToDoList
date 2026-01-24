@@ -1,0 +1,43 @@
+﻿@model Person
+
+<form asp-action="CreateUsers" asp-controller="Home" method="post">
+
+    <div class="mb-4">
+        <label class="form-label fw-semibold">User Name</label>
+        <div class="input-group input-group-lg">
+            <span class="input-group-text bg-light border-end-0">
+                <i class="bi bi-tag-fill text-primary"></i>
+            </span>
+            <input type="text"
+                   class="form-control border-start-0"
+                   name="Name"
+                   placeholder="Enter Your name"
+                   required>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <div class="input-group input-group-lg">
+            <span class="input-group-text bg-light border-end-0">
+                <i class="bi bi-tag-fill text-primary"></i>
+            </span>
+            <input type="number"
+                   class="form-control border-start-0"
+                   name="Age"
+                   placeholder="Enter Your Age">
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-end gap-3">
+        <a href="/Home/Index" class="btn btn-outline-secondary btn-lg px-5">
+            Cancel
+        </a>
+
+        <button type="submit" class="btn btn-primary btn-lg px-5 fw-semibold"
+        href="/Task/taskIndex">
+            Create
+        </button>
+    </div>
+
+</form>

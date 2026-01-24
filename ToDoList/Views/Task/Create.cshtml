@@ -1,0 +1,39 @@
+﻿@model ToDoList.Models.Mission
+
+<h2>Create New Mission</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="PersonId" />
+
+    <div class="mb-3">
+        <label asp-for="TaskTitle" class="form-label"></label>
+        <input asp-for="TaskTitle" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Deadline" class="form-label"></label>
+        <input asp-for="Deadline" type="datetime-local" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <select asp-for="Status" class="form-select">
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Attach File</label>
+        <input type="file" name="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="taskIndex" asp-route-id="@Model.PersonId" class="btn btn-secondary">Cancel</a>
+</form>
