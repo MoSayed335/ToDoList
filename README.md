@@ -1,66 +1,44 @@
-📝 To-Do List Project
-A robust and scalable To-Do List application built to demonstrate modern backend development practices, clean architecture, and efficient task management.
+📌 Project Description
 
-🚀 Features
-Full CRUD Operations: Create, Read, Update, and Delete tasks seamlessly.
+This project is a Todo List Web Application developed using ASP.NET Core MVC.
+The application allows users to manage their daily tasks through a simple and intuitive interface. Users can create, update, view, and delete tasks while the system stores and manages the data using Entity Framework Core with SQL Server as the database.
 
-Task Status: Mark tasks as "Completed" or "Pending".
+The main goal of this project is to demonstrate the implementation of CRUD operations, database integration, and the MVC architectural pattern in a real-world web application scenario.
 
-Data Persistence: Integrated with SQL Server for reliable data storage.
+The application is structured following best practices in ASP.NET Core MVC, separating responsibilities between Models, Views, and Controllers to ensure maintainable and scalable code.
+------------------------------------------------------------------------------------------------------------
 
-Architecture: Implemented using Layered Architecture and SOLID principles.
+⚙️ Main Features
 
-Clean Code: Utilizes DTOs (Data Transfer Objects) to ensure a clean separation between layers.
+Create new tasks
 
-Security: (Optional) Support for JWT Authentication and Identity management.
+View a list of all tasks
 
-🛠️ Tech Stack
-Framework: .NET Core (ASP.NET MVC / Web API)
+Edit existing tasks
 
-Language: C#
+Delete tasks
 
-Database: SQL Server
+Mark tasks as completed
 
-ORM: Entity Framework Core
+Store tasks in a relational database
 
-Design Patterns: Repository Pattern, DTOs, Dependency Injection
+Clean MVC project structure
+-------------------------------------------------------------------------------------------------------
 
-📂 Project Structure
-Plaintext
-src/
-├── ToDoList.Web        # UI / API Controllers
-├── ToDoList.Core       # Entities and Business Logic
-├── ToDoList.Infrastructure # Data Access and Repository implementation
-└── ToDoList.Services   # Service Layer (Business rules)
-⚙️ Getting Started
-Prerequisites
-.NET SDK (version 6.0 or higher)
+🛠 Technologies Used
+
+C#
+
+ASP.NET Core MVC
+
+Entity Framework Core
 
 SQL Server
 
-Visual Studio 2022 or VS Code
+HTML5 / CSS3
 
-Installation
-Clone the repository:
+Bootstrap
+------------------------------------------------------------------------------------------------------
+🎯 Purpose of the Project
 
-Bash
-git clone https://github.com/YourUsername/todo-list-repo.git
-Update Connection String:
-Navigate to appsettings.json and update the DefaultConnection with your SQL Server credentials.
-
-Apply Migrations:
-
-Bash
-dotnet ef database update
-Run the application:
-
-Bash
-dotnet run
-📸 Screenshots
-(Optional: Add images of your app here to make the Repo look professional)
-
-🤝 Contributing
-Contributions are welcome! If you have any ideas to improve the project, feel free to fork the repo and submit a pull request.
-
-📄 License
-This project is licensed under the MIT License.
+This project was developed as a practice project to demonstrate backend development skills using the .NET ecosystem, including database interaction, MVC architecture, and implementing full CRUD functionality in a web application.
